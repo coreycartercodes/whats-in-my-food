@@ -16,5 +16,19 @@ RSpec.describe 'Food Search', type: :feature do
       expect(@total_count).to eq(38680)
       expect(page).to have_content('38680 Total Dishes Found!')
     end
+    it 'can return error if no foods found' do
+      @foods = FoodFacade.find_dishes('asdf')
+      @total_count = FoodFacade.find_count("asdf")
+      visit '/'
+
+      fill_in :ingredient, with: 'asdf'
+
+      click_button 'Search'
+
+      expect(current_path).to eq('/')
+      expect(@foods.count).to eq(0)
+      expect(@total_count).to eq(0)
+      expect(page).to have_content('Sorry, no dishes were found.')
+    end
   end
 end

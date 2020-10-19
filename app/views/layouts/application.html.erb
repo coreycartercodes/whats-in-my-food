@@ -6,9 +6,17 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+
   </head>
 
   <body>
+  <nav>
+    <% flash.each do |name, msg| %>
+        <div class= "alert-<%=name%>">
+          <p><%= msg %></p>
+        </div>
+    <% end %>
+    </nav>
     <%= yield %>
   </body>
 
