@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Food Search', type: :feature do
   describe 'page' do
     it 'can search by food as ingredient' do
-      @foods = FoodFacade.find('sweet potatoes')
+      @foods = FoodFacade.find_dishes('sweet potatoes')
+      @total_count = FoodFacade.find_count("sweet potatoes")
       visit '/'
 
       fill_in :ingredient, with: 'sweet potatoes'
@@ -11,8 +12,9 @@ RSpec.describe 'Food Search', type: :feature do
       click_button 'Search'
 
       expect(current_path).to eq('/foods')
-      expect(@foods.size).to eq(10)
-      save_and_open_page
+      expect(@foods.count).to eq(10)
+      expect(@total_count).to eq(38680)
+      expect(page).to have_content('38680 Total Dishes Found!')
     end
   end
 end
