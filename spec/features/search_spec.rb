@@ -30,5 +30,18 @@ RSpec.describe 'Food Search', type: :feature do
       expect(@total_count).to eq(0)
       expect(page).to have_content('Sorry, no dishes were found.')
     end
+
+    it 'can return error if nil ingredient' do
+      @foods = FoodFacade.find_dishes('')
+      @total_count = FoodFacade.find_count('')
+      visit '/'
+
+      fill_in :ingredient, with: ''
+
+      click_button 'Search'
+
+      expect(current_path).to eq('/')
+      expect(page).to have_content('Please enter an ingredient')
+    end
   end
 end
