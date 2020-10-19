@@ -1,11 +1,11 @@
 <center>
-<h1><%= @foods.count %> Total Dishes Found!</h1>
+<h1><%= @total_count %> Total Dishes Found!</h1>
   <% @foods.each do |food| %>
     <div id="food-<%= food.id %>">
     <h3><%= food.description %></h3>
     <p>GTIN/UPC Code: <%= food.code %></p>
-    <p>GTIN/UPC Code: <%= food.brand %></p>
-    <p>GTIN/UPC Code: <%= food.ingredients %></p>
+    <p>Brand Owner: <%= food.brand %></p>
+    <p>Ingredients: <%= food.ingredients %></p>
     </div>
   <% end %>
 
